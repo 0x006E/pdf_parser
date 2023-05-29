@@ -14,7 +14,6 @@ setup(
     packages=find_packages(include=['pdf_parser', 'pdf_parser.*']),
     install_requires=[
         'camelot-py[base]',
-        'poppler',
         'pandas'
     ],
     classifiers=[
