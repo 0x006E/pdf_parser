@@ -3,12 +3,12 @@ PDF Parser is a Python package that leverages the Camelot library to parse table
 
 ## Installation
 
-`pip install pdf_parser
+`pip install .
 `
 
 ## Usage
 
-`<pre><code>from pdf_parser import parse_pdf
+<pre><code>from pdf_parser import parse_pdf
 
 pdf_file_path = '/path/to/your/pdf_file.pdf'
 results = parse_pdf(pdf_file_path)
@@ -17,7 +17,7 @@ for result in results:
     register_no = result["regno"]
     branch = extract_branch_from_regno(register_no)
     print(branch)
-`
+
 
 ## License
 
