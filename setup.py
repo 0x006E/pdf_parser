@@ -13,7 +13,7 @@ setup(
     url='https://github.com/0x006e/pdf_parser',
     packages=find_packages(include=['pdf_parser', 'pdf_parser.*']),
     install_requires=[
-        'camelot-py[base]',
+        'camelot-py[cv]',
         'pandas'
     ],
     classifiers=[
