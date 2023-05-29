@@ -11,10 +11,10 @@ setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/0x006e/pdf_parser',
-    packages=find_packages(),
+    packages=find_packages(include=['pdf_parser', 'pdf_parser.*']),
     install_requires=[
-        'camelot-py[cv]',
-        'numpy',
+        'camelot-py[base]',
+        'poppler',
         'pandas'
     ],
     classifiers=[

@@ -21,7 +21,7 @@ def extract_branch_from_regno(regno):
         return "error"
 
 def parse_pdf(file_path):
-    tables = camelot.read_pdf(file_path, pages='1-end', flavor='stream')
+    tables = camelot.read_pdf(file_path, pages='1-end', flavor='stream', backend='poppler')
     extracted_results = []
     for table in tables:
         for index, row in table.df.iterrows():
