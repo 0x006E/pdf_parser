@@ -2,8 +2,9 @@ import camelot
 
 from pdf_parser.exceptions import PDFParsingError
 from pdf_parser.parsers.student_result_parser import StudentResultParser
+from pdf_parser.parsers.subject_details_parser import SubjectDetailsParser
 from pdf_parser.utils.conversion_backend import ConversionBackend
-from pdf_parser.utils.data_utils import update_student_details, replace_subject_name
+from pdf_parser.utils.data_utils import update_student_details, add_subject_name
 
 
 def parse_pdf(file_path):
@@ -14,17 +15,16 @@ def parse_pdf(file_path):
         raise PDFParsingError(f"Error parsing PDF: {str(error)}") from error
 
     student_parser = StudentResultParser()
-
+    subject_details_parser = SubjectDetailsParser()
 
     for table in tables:
         for _, row in table.df.iterrows():
             result = student_parser.parse_row(row)
+            subcode = subject_details_parser.parse_row(row)
             if result:
                 final_data = update_student_details(result, final_data)
+            elif subcode:
+                final_data = add_subject_name(subcode['code'], subcode['name'], final_data)
 
     return final_data
 
-
-pdf_file_path = 'r.pdf'
-results = parse_pdf(pdf_file_path)
-print(results)
