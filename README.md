@@ -2,8 +2,11 @@
 PDF Parser is a Python package that leverages the Camelot library to parse tables from PDF documents.
 
 ## Installation
-
-`pip install .
+- Before using the library, the dependency libGL.so should be present in the system. This can be installed in Ubuntu/Debian by using apt
+`sudo apt install libgl-dev`
+- You can install this library by using pip
+`
+pip install .
 `
 
 ## Usage
@@ -12,11 +15,9 @@ PDF Parser is a Python package that leverages the Camelot library to parse table
 
 pdf_file_path = '/path/to/your/pdf_file.pdf'
 results = parse_pdf(pdf_file_path)
+</code></pre>
 
-for result in results:
-    register_no = result["regno"]
-    branch = extract_branch_from_regno(register_no)
-    print(branch)
+The result should be a JSON structure containing student data along with other details
 
 
 ## License
