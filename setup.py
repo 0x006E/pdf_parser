@@ -2,6 +2,9 @@ from setuptools import setup, find_packages
 
 with open('README.md', 'r') as f:
     long_description = f.read()
+    
+with open('requirements.txt') as f:
+    required = f.read().splitlines()
 
 setup(
     name='pdf_parser',
@@ -12,10 +15,7 @@ setup(
     long_description_content_type='text/markdown',
     url='https://github.com/0x006e/pdf_parser',
     packages=find_packages(include=['pdf_parser', 'pdf_parser.*']),
-    install_requires=[
-        'camelot-py[cv]',
-        'pandas'
-    ],
+    install_requires=required,
     classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: MIT License',
