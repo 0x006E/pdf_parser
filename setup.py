@@ -14,10 +14,10 @@ setup(
     packages=find_packages(include=['pdf_parser', 'pdf_parser.*']),
     install_requires=[
     "camelot-fork==0.20.1",
-    "opencv-python==4.7.0.72"
-    "PyPDF2==2.12.1"
-    "pymupdf==1.22.3"
-    "dpath==2.1.6"
+    "opencv-python==4.7.0.72",
+    "PyPDF2==2.12.1",
+    "pymupdf==1.22.3",
+    "dpath==2.1.6",
     "pandas"
     ],
     classifiers=[
