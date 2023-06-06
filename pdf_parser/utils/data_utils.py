@@ -1,4 +1,4 @@
-import dpath.util
+import dpath
 
 
 def update_student_details(data, final_data):
@@ -16,30 +16,30 @@ def update_student_details(data, final_data):
     branch_path = f"years/'{year}'/branches/{branch}"
 
     # Set branch code and name in final_data
-    dpath.util.new(intermediate_dict, branch_path + "/name", None)
+    dpath.new(intermediate_dict, branch_path + "/name", None)
 
     # Set subject codes and names in final_data
     for subject in subjects:
         subject_code = subject['subcode']
-        print(dpath.search(final_data, "subjects/" + subject_code))
-        if dpath.get(final_data, "subjects/" + subject_code) is not None:
+        matches = list(dpath.search(final_data, "subjects/" + subject_code))
+        if matches:
             continue
-        dpath.util.new(intermediate_dict, "subjects/" + subject_code, None)
+        dpath.new(intermediate_dict, "subjects/" + subject_code, None)
 
     # Create path to the student
-    student_path = branch_path + f"/students/0"
+    student_path = branch_path + "/students/0"
 
     # Set student register number in final_data
-    dpath.util.new(intermediate_dict, student_path + "/register_number", register_number)
+    dpath.new(intermediate_dict, student_path + "/register_number", register_number)
 
     # Set student lateral entry status in final_data
-    dpath.util.new(intermediate_dict, student_path + "/lateral_entry", lateral_entry)
+    dpath.new(intermediate_dict, student_path + "/lateral_entry", lateral_entry)
 
     # Set subjects and grades for the student
     for subject in subjects:
         subject_code = subject['subcode']
         grade = subject['grade']
-        dpath.util.new(intermediate_dict, student_path + f"/subjects/{subject_code}", grade)
+        dpath.new(intermediate_dict, student_path + f"/subjects/{subject_code}", grade)
 
     return dpath.merge(final_data, intermediate_dict)
 
