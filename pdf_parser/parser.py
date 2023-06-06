@@ -1,5 +1,5 @@
 import camelot
-
+import logging
 from pdf_parser.exceptions import PDFParsingError
 from pdf_parser.parsers.student_result_parser import StudentResultParser
 from pdf_parser.parsers.subject_details_parser import SubjectDetailsParser
@@ -7,7 +7,16 @@ from pdf_parser.utils.conversion_backend import ConversionBackend
 from pdf_parser.utils.data_utils import update_student_details, add_subject_name
 
 
-def parse_pdf(file_path):
+def parse_pdf(file_path, log_file):
+    logging.basicConfig(filename=log_file,
+                    filemode='a',
+                    format='%(asctime)s %(name)s %(levelname)s %(message)s',
+                    datefmt='%H:%M:%S',
+                    level=logging.INFO)
+
+    logging.info("Running parser")
+    logger = logging.getLogger('pdf_parser')
+
     final_data = {}
     try:
         tables = camelot.read_pdf(file_path, pages='1-end', backend=ConversionBackend())
@@ -16,15 +25,20 @@ def parse_pdf(file_path):
 
     student_parser = StudentResultParser()
     subject_details_parser = SubjectDetailsParser()
-
-    for table in tables:
+    num_tables = str(len(tables))
+    logger.info("Found %s tables in file", num_tables)
+    for index, table in enumerate(tables):
+        logger.info("Parsing table: %s/%s", str(index), num_tables)
         for _, row in table.df.iterrows():
             result = student_parser.parse_row(row)
             subcode = subject_details_parser.parse_row(row)
             if result:
                 final_data = update_student_details(result, final_data)
+                logger.debug("Found result record. Adding to dictionary")
             elif subcode:
                 final_data = add_subject_name(subcode['code'], subcode['name'], final_data)
-
+                logger.debug("Found subject record. Adding to dictionary")
+    logger.info("Parsing done. exiting")
     return final_data
+
 
