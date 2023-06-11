@@ -31,6 +31,9 @@ def update_student_details(data, final_data):
 
     # Set student register number in final_data
     dpath.new(intermediate_dict, student_path + "/register_number", register_number)
+    
+    # Set additional register ingo in final_data
+    dpath.new(intermediate_dict, student_path + "/register_info", register_info)
 
     # Set student lateral entry status in final_data
     dpath.new(intermediate_dict, student_path + "/lateral_entry", lateral_entry)
