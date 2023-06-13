@@ -27,6 +27,6 @@ jobs:
           git config --global user.name "Nithin S Varrier"
       - name: Commit and push wheel
         run: |
-          git add -f ./dist/*.whl
+          git add -f ./dist/pdf*.whl
           git commit -m 'pushing new wheel'
           git push
