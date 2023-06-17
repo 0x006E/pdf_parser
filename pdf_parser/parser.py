@@ -6,18 +6,10 @@ from pdf_parser.parsers.subject_details_parser import SubjectDetailsParser
 from pdf_parser.utils.conversion_backend import ConversionBackend
 from pdf_parser.utils.data_utils import update_student_details, add_subject_name
 
-
-def parse_pdf(file_path, log_file):
-    logging.basicConfig(filename=log_file,
-                    filemode='a',
-                    format='%(asctime)s %(name)s %(levelname)s %(message)s',
-                    datefmt='%H:%M:%S',
-                    level=logging.INFO)
-
-    logging.info("Running parser")
+def parse_pdf(file_path, pages="1-end", final_data={}):
     logger = logging.getLogger('pdf_parser')
+    logger.info("Running parser")
 
-    final_data = {}
     try:
         tables = camelot.read_pdf(file_path, pages='1-end', backend=ConversionBackend())
     except Exception as error:
