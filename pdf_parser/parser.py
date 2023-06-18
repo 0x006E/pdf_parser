@@ -6,12 +6,13 @@ from pdf_parser.parsers.subject_details_parser import SubjectDetailsParser
 from pdf_parser.utils.conversion_backend import ConversionBackend
 from pdf_parser.utils.data_utils import update_student_details, add_subject_name
 
+logger = logging.getLogger('pdf_parser')
+
 def parse_pdf(file_path, pages="1-end", final_data={}):
-    logger = logging.getLogger('pdf_parser')
     logger.info("Running parser")
 
     try:
-        tables = camelot.read_pdf(file_path, pages='1-end', backend=ConversionBackend())
+        tables = camelot.read_pdf(file_path, pages=pages, backend=ConversionBackend())
     except Exception as error:
         raise PDFParsingError(f"Error parsing PDF: {str(error)}") from error
 
