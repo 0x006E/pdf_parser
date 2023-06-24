@@ -10,7 +10,6 @@ class SubjectDetailsParser(RowParser):
     def __init__(self):
         super().__init__(self.SUBJECTCODE_PATTERN)
 
-    r'^([A-Z]{3})(\d{3})$'
     def parse_row(self, row):
         clean_subcode = self.__clean_string(row[0])
         subject_info = super().parse_row(clean_subcode)
