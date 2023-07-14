@@ -13,10 +13,10 @@ setup(
     url='https://github.com/0x006e/pdf_parser',
     packages=find_packages(include=['pdf_parser', 'pdf_parser.*']),
     install_requires=[
-    "camelot-fork==0.20.1",
-    "opencv-python==4.7.0.72",
-    "pymupdf==1.22.3",
-    "dpath==2.1.6",
+    "camelot-fork",
+    "opencv-python",
+    "pymupdf",
+    "dpath",
     "pandas"
     ],
     classifiers=[
